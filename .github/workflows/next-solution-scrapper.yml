@@ -1,0 +1,43 @@
+name: Generate Next antlr4 based Solution
+
+on: workflow_dispatch
+
+jobs:
+  run-blueprinter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup environment variables
+        id: date
+        run: |
+          echo "AOC_SESSION_ID=${{ secrets.AOC_SESSION_ID }}" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
+      - name: Commit generated solution
+        run: |
+          git config user.name 'Viinyard'
+          git config user.email 'viinyard@users.noreply.github.com'
+          mvn clean package -DskipTests
+          mvn -pl solutions blueprinter:blueprint@next-solution
+          git add -A
+          git commit -am "Next solution"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.PAT }}
+          commit-message: "Next solution"
+          branch: "next-solution"
+          title: "Next solution"
+          body: "This pull request contains the generated solution for next solution."
+          draft: true
+          labels: "generated"
