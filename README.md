@@ -89,6 +89,19 @@ Or you can set it in the BluePrinter environment.xml file:
    - Clic on `New repository secret`.
    - Add a new secret with the name `AOC_SESSION_ID` and the value `your_session_id`.
 
+3. Create a Personal Access Token (PAT) for the workflow:
+   - Fine-grained [Personal Access Token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with `contents: write` and `pull-requests: write` scopes.
+   - Go to your account settings.
+   - Go to the `Developer settings` tab.
+   - Go to the `Personal access tokens` section.
+   - Go to the `Fine-grained token` section.
+   - Create a new token with the `contents: write` and `pull-requests: write` scopes and copy the token.
+   - Go to your repository settings.
+   - Go to the `Secrets and variables` tab.
+   - Go to the `Actions` section.
+   - Clic on `New repository secret`.
+   - Add a new secret with the name `PAT` and the value `your_personal_access_token`.
+
 That's it, you are ready to generate your solutions with Github Actions. Solutions will be generated in a brand new branch and a pull request will be created.
 
 ## How to use
