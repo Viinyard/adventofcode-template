@@ -67,6 +67,7 @@
                                 <argument>--YEAR=${year}</argument>
                                 <argument>--DAY=${day}</argument>
                                 <argument>--PART=${part}</argument>
+                                <argument>--RESPONSE_TYPE=Long</argument>
                             </arguments>
                         </configuration>
                     </execution>
